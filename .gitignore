@@ -52,13 +52,12 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 cover/
-
+cysignals_crash_logs/
 # Translations
 *.mo
 *.pot
 
 # Django stuff:
-*.log
 local_settings.py
 db.sqlite3
 db.sqlite3-journal

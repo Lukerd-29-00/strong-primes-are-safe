@@ -6,12 +6,14 @@ from Crypto.Util import Padding
 
 GENERATOR = 2
 KEY_BYTES = 16
-PRIME_BITS = 1024
+PRIME_BITS = 2048
 
-def main()->str:
+def main(primes)->str:
     prc = process(['python3', 'server.py'])
     try:
         p = int(prc.recvline().decode('utf-8'),16)
+        if p not in primes:
+            raise ValueError(f"Server responded with invalid prime: {p}")
         A = pow(GENERATOR,alice_secret.a,p)
         prc.sendline(hex(A)[2:].encode('utf-8'))
         B = int(prc.recvline().decode('utf-8'),16)
@@ -24,4 +26,6 @@ def main()->str:
         prc.kill()
 
 if __name__ == "__main__":
-    print(main())
+    with open("strong_primes",'r') as f:
+        primes = set(map(lambda p: int(p.strip(),16),f))
+        print(main(primes))
