@@ -1,0 +1,1 @@
+FLAG = b'UDCTF{th3_d3vil_15_1n_th3_det4il5}'
