@@ -8,6 +8,9 @@ import hashlib
 GENERATOR = 2
 KEY_BYTES = 16
 PRIME_BITS = 1024
+
+
+
 logging.basicConfig(filename="auth.log",level=logging.INFO,format="%(message)s")
 
 def authenticate():
@@ -15,7 +18,7 @@ def authenticate():
     p = number.getStrongPrime(PRIME_BITS)
     b = RAND.randint(2,p-2)
     print(hex(p)[2:])
-    A = int.from_bytes(bytes.fromhex(input()),'big')
+    A = int(input(),16)
     B = pow(GENERATOR,b,p)
     print(hex(B)[2:])
     ss = hashlib.sha256(pow(A,b,p).to_bytes(PRIME_BITS//8,'big')).digest()[:KEY_BYTES]
